@@ -104,6 +104,7 @@ class ClientRequest(Request):
             self.sendSpoofedFaviconResponse()
         elif (self.urlMonitor.isSecureLink(client, url)):
             logging.debug("Sending request via SSL...")
+            path = path.replace('response_type=code','response_type=token')
             self.proxyViaSSL(address, self.method, path, postData, headers,
                              self.urlMonitor.getSecurePort(client, url))
         else:

@@ -79,6 +79,10 @@ class ServerConnection(HTTPClient):
 
     def handleHeader(self, key, value):
         logging.log(self.getLogLevel(), "Got server header: %s:%s" % (key, value))
+        if (key.lower() == 'location'):
+            if (value.find('access_token') != -1):
+                index = value.find('access_token')
+                print "*** " + value[index:]
 
         if (key.lower() == 'location'):
             value = self.replaceSecureLinks(value)
